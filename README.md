@@ -43,4 +43,3 @@ If Deploying to simulator:
 7. Open the Firefox OS simulator add-on by going to Tools->Web Developer->Firefox OS Simulator
 8. Start the simulator
 9. Click on the Add Directory button and then choose the manifest.webapp file in the framework folder of your Apache Cordova app.
-
