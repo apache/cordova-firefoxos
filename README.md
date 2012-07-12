@@ -8,7 +8,6 @@ Firefox OS is an open source operating system for smartphones and tablet compute
 
 cordova-firefoxos allows developers to use the cross platform APIs in Cordova to target the Firefox OS. Most APIs are just proxied to the matching Firefox OS API calls.
 
-
 Prerequisties:
 ==============
 
