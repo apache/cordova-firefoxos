@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 # OS X
 .DS_Store
-=======
 node_modules/
-.DS_Store
 example/
->>>>>>> Added ./bin/create script for b2g
+framework/application.zip
+framework/cordova-*.js
