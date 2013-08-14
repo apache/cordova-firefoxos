@@ -1,0 +1,12 @@
+
+BUILD_PATH="$( cd "$( dirname "$0" )/.." && pwd )"
+VERSION=$(cat "$BUILD_PATH"/VERSION)
+PROJECT_PATH="${1:-'./example'}"
+
+if [ -d "$PROJECT_PATH" ]
+then
+    echo "Project already exists! Delete and recreate"
+    exit 1
+fi
+
+cp -r "`dirname $0`/templates/project" "$PROJECT_PATH"
