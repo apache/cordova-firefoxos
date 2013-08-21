@@ -98,7 +98,5 @@ function updateManifest(ROOT, project_path, project_name){
     var file_content = fs.readFileSync(filename);
     var content = JSON.parse(file_content);
     content.name = project_name;
-    console.log(project_name);
-    console.log(content);
     fs.writeFileSync(filename, JSON.stringify(content));
 }
