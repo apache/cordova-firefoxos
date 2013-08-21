@@ -1,12 +1,104 @@
+#!/usr/bin/env node
 
-BUILD_PATH="$( cd "$( dirname "$0" )/.." && pwd )"
-VERSION=$(cat "$BUILD_PATH"/VERSION)
-PROJECT_PATH="${1:-'./example'}"
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+ 
+var fs = require('fs'),
+    shjs = require('shelljs'),
+    args = process.argv,
+    path = require('path'),
+    check_reqs = require('./check_reqs');
 
-if [ -d "$PROJECT_PATH" ]
-then
-    echo "Project already exists! Delete and recreate"
-    exit 1
-fi
+/*
+* $ create [options]
+*
+* Creates an firefoxos application with the given options.
+*
+* Options:
+*
+* - `project_path` {String} Path to the new Cordova android project.
+* - `package_name`{String} Package name, following reverse-domain style convention.
+* - `project_name` {String} Project name.
+*/
 
-cp -r "`dirname $0`/templates/project" "$PROJECT_PATH"
+// Support basic help commands
+if((args[2] == '--help' || args[2] == '/?' || args[2] == '-h' ||
+                    args[2] == 'help' || args[2] == '-help' || args[2] == '/help')) {
+    help();
+} else {
+    main(args[2], args[3], args[4]);
+}
+
+function main(project_path,package_name,project_name){
+    var ROOT = path.join(__dirname, '..');
+    console.log(ROOT);
+    
+    var VERSION = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8');
+    console.log(VERSION);
+    
+    // Set default values for path, package and name
+    project_path = typeof project_path !== 'undefined' ? project_path : "CordovaExample";
+    package_name = typeof package_name !== 'undefined' ? package_name : 'org.apache.cordova.example';
+    project_name = typeof project_name !== 'undefined' ? project_name : 'CordovaExample';
+
+    // Check if project already exists
+    if(fs.existsSync(project_path)) {
+        console.error('Project already exists! Delete and recreate');
+        process.exit(2);
+    }
+    
+    // Check that requirements are met and proper targets are installed
+    if(!check_reqs.run()) {
+        console.error('Please make sure you meeet the software requirements in order to build an firefoxos cordova project');
+        process.exit(2);
+    }
+    
+    console.log('Creating Firefox OS project');
+    console.log('Project Path '+ path.relative(process.cwd(),project_path));
+    console.log('Package Name '+ package_name);
+    console.log('Project Name '+ project_name);
+
+    //copy template folder
+    shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'www'), project_path);
+    
+    //copy cordova js file
+    shjs.cp('-r', path.join(ROOT, 'javascript', 'cordova.js'), path.join(project_path,'www'));
+    
+    //copy manifest file
+    shjs.cp('-r', path.join(ROOT, 'framework', 'manifest.webapp'), path.join(project_path,'www'));
+    
+    //update app manifest file
+    updateManifest(ROOT, project_path, project_name);
+    
+    
+}
+
+function help(){
+    console.log('you need help son');
+}
+
+function updateManifest(ROOT, project_path, project_name){
+    var filename = path.join(ROOT, project_path, 'www', 'manifest.webapp');
+    var file_content = fs.readFileSync(filename);
+    var content = JSON.parse(file_content);
+    content.name = project_name;
+    console.log(project_name);
+    console.log(content);
+    fs.writeFileSync(filename, JSON.stringify(content));
+}

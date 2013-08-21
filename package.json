@@ -1,0 +1,28 @@
+{
+  "name": "cordova-firefoxos",
+  "version": "0.0.0",
+  "description": "cordova firefoxos",
+  "main": "create",
+  "scripts": {
+    "test": "./create"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-wip-us.apache.org/repos/asf/cordova-firefoxos.git"
+  },
+  "keywords": [
+    "cordova",
+    "cli",
+    "tooling",
+    "firefoxos"
+  ],
+  "dependencies": {
+    "shelljs": "0.1.4"
+  },
+  "author": "Steve Gill",
+  "contributors": [
+      {"name": "James Long","email": "jlong@mozilla.com"},
+      {"name": "Herm Wong", "email": "hermanw@adobe.com"},
+  ],
+  "license": "Apache V2"
+}
