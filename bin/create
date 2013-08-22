@@ -75,15 +75,7 @@ function main(project_path,package_name,project_name){
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'www'), project_path);
     
     //copy cordova js file
-    shjs.cp('-r', path.join(ROOT, 'javascript', 'cordova.js'), path.join(project_path,'www'));
-    
-    //copy manifest file
-    shjs.cp('-r', path.join(ROOT, 'framework', 'manifest.webapp'), path.join(project_path,'www'));
-    
-    //update app manifest file
-    updateManifest(ROOT, project_path, project_name);
-    
-    
+    shjs.cp('-r', path.join(ROOT, 'javascript', 'cordova.js'), path.join(project_path,'www'));   
 }
 
 function help(){
@@ -92,12 +84,4 @@ function help(){
     console.log(' <package_name>: Package name, following reverse-domain style convention');
     console.log(' <project_name>: Project name');
     process.exit(0);
-}
-
-function updateManifest(ROOT, project_path, project_name){
-    var filename = path.join(ROOT, project_path, 'www', 'manifest.webapp');
-    var file_content = fs.readFileSync(filename);
-    var content = JSON.parse(file_content);
-    content.name = project_name;
-    fs.writeFileSync(filename, JSON.stringify(content));
 }
