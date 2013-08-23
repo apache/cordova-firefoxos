@@ -22,7 +22,7 @@
   "author": "Steve Gill",
   "contributors": [
       {"name": "James Long","email": "jlong@mozilla.com"},
-      {"name": "Herm Wong", "email": "hermanw@adobe.com"},
+      {"name": "Herm Wong", "email": "hermanw@adobe.com"}
   ],
   "license": "Apache V2"
 }
