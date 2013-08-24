@@ -75,7 +75,11 @@ function main(project_path,package_name,project_name){
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'www'), project_path);
     
     //copy cordova js file
-    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));   
+    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));  
+
+    //copy cordova folder
+    shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'cordova'), project_path); 
+    shjs.chmod(755, path.join(project_path, 'cordova', 'run'));
 }
 
 function help(){
