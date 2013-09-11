@@ -788,9 +788,14 @@ module.exports = channel;
 
 // file: lib/firefoxos/exec.js
 define("cordova/exec", function(require, exports, module) {
-module.exports = function() {
-    console.log('exec not implemented yet');
-}
+var firefoxos = require('cordova/platform');
+
+module.exports = function(success, fail, service, action, actionArgs) {
+    var plugin = firefoxos.getPlugin(service);
+    actionArgs.unshift(fail);
+    actionArgs.unshift(success);
+    plugin[action].apply(plugin, actionArgs);
+};
 
 });
 
@@ -1025,10 +1030,21 @@ exports.reset();
 // file: lib/firefoxos/platform.js
 define("cordova/platform", function(require, exports, module) {
 
+var plugins = {};
+
 module.exports = {
     id: 'firefoxos',
     bootstrap: function() {
         require('cordova/channel').onNativeReady.fire();
+    },
+
+    registerPlugin: function(name, plugin) {
+        plugins[name] = plugin;
+        console.log('registered ' + name);
+    },
+
+    getPlugin: function(name) {
+        return plugins[name];
     }
 };
 
