@@ -1,5 +1,5 @@
 // Platform: firefoxos
-// 3.0.0-dev-46-g3be32a3
+// 3.0.0-dev-54-g0627308
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.0.0-dev-46-g3be32a3';
+var CORDOVA_JS_BUILD_LABEL = '3.0.0-dev-54-g0627308';
 // file: lib/scripts/require.js
 
 var require,
@@ -171,6 +171,7 @@ function createEvent(type, data) {
 var cordova = {
     define:define,
     require:require,
+    version:CORDOVA_JS_BUILD_LABEL,
     /**
      * Methods to add/remove your own addEventListener hijacking on document + window.
      */
@@ -788,9 +789,15 @@ module.exports = channel;
 
 // file: lib/firefoxos/exec.js
 define("cordova/exec", function(require, exports, module) {
-module.exports = function() {
-    console.log('exec not implemented yet');
-}
+
+var firefoxos = require('cordova/platform');
+
+module.exports = function(success, fail, service, action, actionArgs) {
+    var plugin = firefoxos.getPlugin(service);
+    actionArgs.unshift(fail);
+    actionArgs.unshift(success);
+    plugin[action].apply(plugin, actionArgs);
+};
 
 });
 
@@ -1025,10 +1032,23 @@ exports.reset();
 // file: lib/firefoxos/platform.js
 define("cordova/platform", function(require, exports, module) {
 
+var plugins = {};
+
 module.exports = {
     id: 'firefoxos',
+    cordovaVersion: '3.0.0',
+
     bootstrap: function() {
         require('cordova/channel').onNativeReady.fire();
+    },
+
+    registerPlugin: function(name, plugin) {
+        plugins[name] = plugin;
+        console.log('registered ' + name);
+    },
+
+    getPlugin: function(name) {
+        return plugins[name];
     }
 };
 
