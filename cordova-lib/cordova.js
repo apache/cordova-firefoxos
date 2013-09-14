@@ -1,5 +1,5 @@
 // Platform: firefoxos
-// 3.0.0-dev-54-g0627308
+// 3.0.0-dev-58-ged1894d
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.0.0-dev-54-g0627308';
+var CORDOVA_JS_BUILD_LABEL = '3.0.0-dev-58-ged1894d';
 // file: lib/scripts/require.js
 
 var require,
@@ -790,15 +790,60 @@ module.exports = channel;
 // file: lib/firefoxos/exec.js
 define("cordova/exec", function(require, exports, module) {
 
-var firefoxos = require('cordova/platform');
+//var firefoxos = require('cordova/platform');
+var cordova = require('cordova');
+var commandProxy = require('cordova/firefoxos/commandProxy');
 
-module.exports = function(success, fail, service, action, actionArgs) {
-    var plugin = firefoxos.getPlugin(service);
-    actionArgs.unshift(fail);
-    actionArgs.unshift(success);
-    plugin[action].apply(plugin, actionArgs);
+module.exports = function(success, fail, service, action, args) {
+    var proxy = commandProxy.get(service,action);
+    if(proxy) {
+        var callbackId = service + cordova.callbackId++;
+        //console.log("EXEC:" + service + " : " + action);
+        if (typeof success == "function" || typeof fail == "function") {
+            cordova.callbacks[callbackId] = {success:success, fail:fail};
+        }
+        try {
+            proxy(success, fail, args);
+        }
+        catch(e) {
+            console.log("Exception calling native with command :: " + service + " :: " + action  + " ::exception=" + e);
+        }
+    }
+    else {
+        fail && fail("Missing Command Error");
+    }
 };
 
+});
+
+// file: lib/firefoxos/firefoxos/commandProxy.js
+define("cordova/firefoxos/commandProxy", function(require, exports, module) {
+
+
+// internal map of proxy function
+var CommandProxyMap = {};
+
+module.exports = {
+
+    // example: cordova.commandProxy.add("Accelerometer",{getCurrentAcceleration: function(successCallback, errorCallback, options) {...},...);
+    add:function(id,proxyObj) {
+        console.log("adding proxy for " + id);
+        CommandProxyMap[id] = proxyObj;
+        return proxyObj;
+    },
+
+    // cordova.commandProxy.remove("Accelerometer");
+    remove:function(id) {
+        var proxy = CommandProxyMap[id];
+        delete CommandProxyMap[id];
+        CommandProxyMap[id] = null;
+        return proxy;
+    },
+
+    get:function(service,action) {
+        return ( CommandProxyMap[service] ? CommandProxyMap[service][action] : null );
+    }
+};
 });
 
 // file: lib/firefoxos/init.js
@@ -1032,23 +1077,13 @@ exports.reset();
 // file: lib/firefoxos/platform.js
 define("cordova/platform", function(require, exports, module) {
 
-var plugins = {};
-
 module.exports = {
     id: 'firefoxos',
     cordovaVersion: '3.0.0',
 
     bootstrap: function() {
+        require('cordova/modulemapper').clobbers('cordova/firefoxos/commandProxy', 'cordova.commandProxy');
         require('cordova/channel').onNativeReady.fire();
-    },
-
-    registerPlugin: function(name, plugin) {
-        plugins[name] = plugin;
-        console.log('registered ' + name);
-    },
-
-    getPlugin: function(name) {
-        return plugins[name];
     }
 };
 
