@@ -1,10 +1,10 @@
 {
   "name": "cordova-firefoxos",
-  "version": "0.0.0",
+  "version": "3.1.0",
   "description": "cordova firefoxos",
-  "main": "create",
+  "main": "./bin/create",
   "scripts": {
-    "test": "./create"
+    "test": "./bin/create"
   },
   "repository": {
     "type": "git",
