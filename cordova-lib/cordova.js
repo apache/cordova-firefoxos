@@ -1,5 +1,5 @@
 // Platform: firefoxos
-// 3.2.0-dev-5ad41a7
+// 3.3.0-dev-d5e4e9e
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.2.0-dev-5ad41a7';
+var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-d5e4e9e';
 // file: lib/scripts/require.js
 
 /*jshint -W079 */
@@ -797,10 +797,10 @@ define("cordova/exec", function(require, exports, module) {
 
 //var firefoxos = require('cordova/platform');
 var cordova = require('cordova');
-var commandProxy = require('cordova/firefoxos/commandProxy');
+var execProxy = require('cordova/exec/proxy');
 
 module.exports = function(success, fail, service, action, args) {
-    var proxy = commandProxy.get(service,action);
+    var proxy = execProxy.get(service,action);
     if(proxy) {
         var callbackId = service + cordova.callbackId++;
         //console.log("EXEC:" + service + " : " + action);
@@ -821,8 +821,8 @@ module.exports = function(success, fail, service, action, args) {
 
 });
 
-// file: lib/firefoxos/firefoxos/commandProxy.js
-define("cordova/firefoxos/commandProxy", function(require, exports, module) {
+// file: lib/common/exec/proxy.js
+define("cordova/exec/proxy", function(require, exports, module) {
 
 
 // internal map of proxy function
@@ -849,6 +849,14 @@ module.exports = {
         return ( CommandProxyMap[service] ? CommandProxyMap[service][action] : null );
     }
 };
+});
+
+// file: lib/firefoxos/firefoxos/commandProxy.js
+define("cordova/firefoxos/commandProxy", function(require, exports, module) {
+
+console.log('WARNING: please require cordova/exec/proxy instead');
+module.exports = require('cordova/exec/proxy');
+
 });
 
 // file: lib/firefoxos/init.js
@@ -1087,7 +1095,7 @@ module.exports = {
     cordovaVersion: '3.0.0',
 
     bootstrap: function() {
-        require('cordova/modulemapper').clobbers('cordova/firefoxos/commandProxy', 'cordova.commandProxy');
+        require('cordova/modulemapper').clobbers('cordova/exec/proxy', 'cordova.commandProxy');
         require('cordova/channel').onNativeReady.fire();
     }
 };
