@@ -51,6 +51,7 @@ function copyScripts(projectPath) {
 }
 
 exports.updateProject = function(projectPath) {
+    console.log("ROOT: " + ROOT);
     var version = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8').trim();
     setShellFatal(true, function() {
         copyJs(projectPath);
