@@ -22,7 +22,7 @@
 var shell = require('shelljs'),
     path  = require('path'),
     fs    = require('fs'),
-    ROOT    = path.join(__dirname, '..');
+    ROOT    = path.join(__dirname, '..', '..');
 
 function setShellFatal(value, func) {
     var oldVal = shell.config.fatal;
