@@ -22,7 +22,7 @@
 var shell = require('shelljs'),
     path  = require('path'),
     fs    = require('fs'),
-    ROOT    = path.join(__dirname, '..', '..');
+    ROOT  = path.join(__dirname, '..', '..');
 
 function setShellFatal(value, func) {
     var oldVal = shell.config.fatal;
@@ -36,22 +36,19 @@ function copyJs(projectPath) {
 }
 
 function copyScripts(projectPath) {
-    var srcScriptsDir = path.join(ROOT, 'bin', 'templates', 'scripts', 'cordova');
+    var srcScriptsDir = path.join(ROOT, 'bin', 'templates', 'project', 'cordova');
     var destScriptsDir = path.join(projectPath, 'cordova');
     // Delete old scripts directory.
     shell.rm('-rf', destScriptsDir);
     // Copy in the new ones.
     shell.cp('-r', srcScriptsDir, projectPath);
-    /*
-    shell.cp(path.join(ROOT, 'bin', 'check_reqs'), path.join(destScriptsDir, 'check_reqs'));
     // Make sure they are executable.
     shell.find(destScriptsDir).forEach(function(entry) {
         shell.chmod(755, entry);
-    });*/
+    });
 }
 
 exports.updateProject = function(projectPath) {
-    console.log("ROOT: " + ROOT);
     var version = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8').trim();
     setShellFatal(true, function() {
         copyJs(projectPath);
