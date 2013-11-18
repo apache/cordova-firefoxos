@@ -1,5 +1,5 @@
 // Platform: firefoxos
-// 3.3.0-dev-d5e4e9e
+// 3.3.0-dev-c9de1bc
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-d5e4e9e';
+var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-c9de1bc';
 // file: lib/scripts/require.js
 
 /*jshint -W079 */
