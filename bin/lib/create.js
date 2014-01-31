@@ -42,11 +42,11 @@ exports.createProject = function(project_path,package_name,project_name){
     
     // Check that requirements are met and proper targets are installed
     if(!check_reqs.run()) {
-        console.error('Please make sure you meeet the software requirements in order to build an firefoxos cordova project');
+        console.error('Please make sure you meet the software requirements in order to build an FirefoxOS Cordova project');
         process.exit(2);
     }
     
-    console.log('Creating Firefox OS project');
+    console.log('Creating FirefoxOS project');
     console.log('Project Path '+ path.relative(process.cwd(),project_path));
     console.log('Package Name '+ package_name);
     console.log('Project Name '+ project_name);
