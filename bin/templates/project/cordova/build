@@ -20,9 +20,7 @@
 */
 
 
-console.log("Build is not implemented");
-if (process.getuid) {
-  console.log('Current uid: ' + process.getuid());
-}
+// Build is not implemented
+
 process.exit(1);
 
