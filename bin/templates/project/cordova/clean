@@ -21,32 +21,18 @@
 
 
 var path = require('path'),
-    build = require('./lib/build'),
+    clean = require('./lib/clean'),
     reqs  = require('./lib/check_reqs'),
     args  = process.argv;
 
-// provide help
-if( args[2] == '--help' || args[2] == '/?' || args[2] == '-h' ||
+// Support basic help commands
+if(args.length > 2
+   || args[2] == '--help' || args[2] == '/?' || args[2] == '-h' ||
                     args[2] == 'help' || args[2] == '-help' || args[2] == '/help') {
-    build.help();
+    console.log('Usage: ' + path.relative(process.cwd(), path.join(__dirname, 'clean')) );
     process.exit(0);
-}
-
-// check for the correct argument count, the correct options
-if(   (args.length > 3)
-   || (args[2] && (   (args[2] != '--debug') 
-                   && (args[2] != '--release')))) {
-      console.error('please only use --debug or --release as argument');
-      build.help();
-      process.exit(2);
 } else {
-    var buildOpt     = 'debug';
-    //var buildTypeOpt = 'web';
-    if(args[2] && args[2] == '--release') {
-        buildOpt = 'release'
-    }
-
-    build.buildProject(buildOpt);
+    clean.cleanProject();
 }
 
 

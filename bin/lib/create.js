@@ -26,6 +26,26 @@ var fs = require('fs'),
     ROOT    = path.join(__dirname, '..', '..'),
     check_reqs = require('./check_reqs');
 
+/*
+try {
+    require.resolve("shelljs");
+    create();
+} catch(e) {
+    console.log('Shelljs module was not found, running \'npm install\'.....');
+    var exec = require('child_process').exec;
+    var cwd = process.cwd();
+    process.chdir(__dirname);
+    exec('npm install',  function (error, stdout, stderr) {
+        if (error !== null) {
+          console.error('ERROR : running \'npm install\' is npm installed? ' + error);
+          console.error(stderr);
+          process.exit(error.code);
+        }
+        process.chdir(cwd);
+        create();
+    });
+*/
+
 exports.createProject = function(project_path,package_name,project_name){
     var VERSION = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8');
     
@@ -53,14 +73,22 @@ exports.createProject = function(project_path,package_name,project_name){
 
     //copy template folder
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'www'), project_path);
+
+    //copy check_reqs file ,creat bin/lip if it does not exist yet
+    if(!fs.existsSync(path.join(project_path,'cordova', 'lib'))) {
+        shjs.mkdir('-p', path.join(project_path,'cordova', 'lib'));
+    }
+    shjs.cp( path.join(ROOT, 'bin', 'lib', 'check_reqs.js'), path.join(project_path,'cordova', 'lib'));
     
     //copy cordova js file
-    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));  
+    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));
 
     //copy cordova folder
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'cordova'), project_path); 
     [
         'run',
+        'build',
+        'clean',
         'version',
     ].forEach(function(f) { 
          shjs.chmod(755, path.join(project_path, 'cordova', f));
