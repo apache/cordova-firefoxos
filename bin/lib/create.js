@@ -26,25 +26,6 @@ var fs = require('fs'),
     ROOT    = path.join(__dirname, '..', '..'),
     check_reqs = require('./check_reqs');
 
-/*
-try {
-    require.resolve("shelljs");
-    create();
-} catch(e) {
-    console.log('Shelljs module was not found, running \'npm install\'.....');
-    var exec = require('child_process').exec;
-    var cwd = process.cwd();
-    process.chdir(__dirname);
-    exec('npm install',  function (error, stdout, stderr) {
-        if (error !== null) {
-          console.error('ERROR : running \'npm install\' is npm installed? ' + error);
-          console.error(stderr);
-          process.exit(error.code);
-        }
-        process.chdir(cwd);
-        create();
-    });
-*/
 
 exports.createProject = function(project_path,package_name,project_name){
     var VERSION = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8');
