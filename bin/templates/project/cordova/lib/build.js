@@ -75,7 +75,7 @@ function hasAllRequiredCustomReleaseArtifacts() {
 
 function moveWwwBuildReleaseToBuild() {
     hasAllRequiredCustomReleaseArtifacts();
-    console.log('Move files at  provided at \'merges/firefoxos/'+buildDirInMerge+'/\' to platforms/firefoxos/build');
+    console.log('Move index.html and manifest.webapp provided at \'merges/firefoxos/'+buildDirInMerge+'/\' to platforms/firefoxos/build');
     shjs.mv('-f', 'platforms/firefoxos/www/'+buildDirInMerge+'/index.html', 'platforms/firefoxos/build/index.html');
     shjs.mv('-f' ,'platforms/firefoxos/www/'+buildDirInMerge+'/manifest.webapp', 'platforms/firefoxos/build/manifest.webapp');
 }
