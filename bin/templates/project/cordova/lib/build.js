@@ -27,10 +27,38 @@ var path = require('path'),
     check_reqs = require('./check_reqs'),
     buildDirInMerge ='build--release';
 
+function hasMergesCustomReleaseArtifactsDir() {
+    return fs.existsSync('merges/firefoxos/'+buildDirInMerge);
+}
+
+
 function hasCustomReleaseArtifactsDir() {
     return fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge);
 }
 
+/**
+ * hasAllMergesRequiredCustomReleaseArtifacts()
+ * checks that merges/firefoxos/build--release is avialable and properly filled.
+ *
+ */
+function hasAllMergesRequiredCustomReleaseArtifacts() {
+    if(!fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/manifest.webapp')) { 
+        console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/manifest.webapp');
+    }
+
+    if(!fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/index.html')) {
+        console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/index.html');
+    }
+
+    return (   fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/manifest.webapp')
+            && fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/index.html') );
+}
+
+/**
+ * hasAllRequiredCustomReleaseArtifacts()
+ * checks that 'cordova prepare' has copied merges/firefoxos to platforms/firefoxos/www
+ *
+ */
 function hasAllRequiredCustomReleaseArtifacts() {
     if(!fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/manifest.webapp')) { 
         console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/manifest.webapp');
@@ -44,21 +72,20 @@ function hasAllRequiredCustomReleaseArtifacts() {
             && fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/index.html') );
 }
 
-function mergeMiniManifest() {
-    // console.log('pwd: '+shjs.pwd());
-    console.log('Merge (mini-)manifest.webapp provided at \'merges/firefoxos/'+buildDirInMerge+'/\'');
+
+function moveWwwBuildReleaseToBuild() {
+    hasAllRequiredCustomReleaseArtifacts();
+    console.log('Move files at  provided at \'merges/firefoxos/'+buildDirInMerge+'/\' to platforms/firefoxos/build');
+    shjs.mv('-f', 'platforms/firefoxos/www/'+buildDirInMerge+'/index.html', 'platforms/firefoxos/build/index.html');
     shjs.mv('-f' ,'platforms/firefoxos/www/'+buildDirInMerge+'/manifest.webapp', 'platforms/firefoxos/build/manifest.webapp');
 }
 
-function mergeIndexHtml() {
-    // console.log('pwd: '+shjs.pwd());
-    console.log('Merge index.html provided at \'merges/firefoxos/'+buildDirInMerge+'/\'');
-    shjs.mv('-f', 'platforms/firefoxos/www/'+buildDirInMerge+'/index.html', 'platforms/firefoxos/build/index.html');
-}
+
+
 
 // cordova merges merge/firefoxos to platforms/firefoxos/www
-// this removes the ''build' directory
-function removeMergesFirefoxosBuildFromWWW() {
+// this removes the 'build--release' directory from platforms/firefoxos/www
+function removeWwwBuildRelease() {
     console.log('Remove '+buildDirInMerge+' from \'platforms/firefoxos/www\'');
     if(fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge)) {
         shjs.rm('-r', 'platforms/firefoxos/www/'+buildDirInMerge);
@@ -87,7 +114,6 @@ exports.buildProject = function(buildTarget){
     
     // if 'debug' (default), remove files we only need for 'release'
     if(buildTarget == 'debug') {
-        // clean.cleanProject(); // remove old build result
         if(hasCustomReleaseArtifactsDir()){ 
             removeMergesFirefoxosBuildFromWWW();
         }
@@ -96,22 +122,25 @@ exports.buildProject = function(buildTarget){
 
     if(buildTarget == 'release') {
         console.log('Building Firefoxos project');
-        // clean.cleanProject(); // remove old build result
-    
-        if(!hasAllRequiredCustomReleaseArtifacts()) {
-               console.error('Check \'https://developer.mozilla.org/en-US/Marketplace/Publishing/Packaged_apps\' for the required artifacts');
+
+        if(!hasAllMergesRequiredCustomReleaseArtifacts()) {
+               console.error('\nCheck \'https://developer.mozilla.org/en-US/Marketplace/Publishing/Packaged_apps\' for the required artifacts');
+               console.error('\n');
                process.exit(2);
-           
+        }
+
+        if(!hasAllRequiredCustomReleaseArtifacts()) {
+               console.error('\nIf merges/firefoxos/build-release has proper content, make sure \'cordova prepare firefoxos\' is run.');
+               console.error('\n');
+               process.exit(2);
         }
 
         if(!fs.existsSync('platforms/firefoxos/build')) {
-            // first run, or project has been cleaned
             fs.mkdir('platforms/firefoxos/build'); 
         }
 
-        mergeMiniManifest();
-        mergeIndexHtml();
-        removeMergesFirefoxosBuildFromWWW(); 
+        moveWwwBuildReleaseToBuild();
+        removeWwwBuildRelease(); 
 
         // add the project in a zipfile
         var zipFile = zip();
@@ -122,7 +151,7 @@ exports.buildProject = function(buildTarget){
     }
 
     // should never get here
-    console.error('Illegal target to build a firefoxos cordova project');
+    console.error('Illegal target to build a firefoxos cordova project ('+buildTarget+')');
     process.exit(2);
 
 }
