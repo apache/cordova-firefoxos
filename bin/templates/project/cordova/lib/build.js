@@ -115,7 +115,7 @@ exports.buildProject = function(buildTarget){
     // if 'debug' (default), remove files we only need for 'release'
     if(buildTarget == 'debug') {
         if(hasCustomReleaseArtifactsDir()){ 
-            removeMergesFirefoxosBuildFromWWW();
+            removeWwwBuildRelease();
         }
         process.exit(0);
     }
