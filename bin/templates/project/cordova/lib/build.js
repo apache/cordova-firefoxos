@@ -43,14 +43,14 @@ function hasCustomReleaseArtifactsDir() {
  */
 function hasAllMergesRequiredCustomReleaseArtifacts() {
     if(!fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/manifest.webapp')) { 
-        console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/manifest.webapp');
+        console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/package.manifest');
     }
 
     if(!fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/index.html')) {
         console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/index.html');
     }
 
-    return (   fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/manifest.webapp')
+    return (   fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/package.manifest')
             && fs.existsSync('merges/firefoxos/'+buildDirInMerge+'/index.html') );
 }
 
@@ -61,14 +61,14 @@ function hasAllMergesRequiredCustomReleaseArtifacts() {
  */
 function hasAllRequiredCustomReleaseArtifacts() {
     if(!fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/manifest.webapp')) { 
-        console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/manifest.webapp');
+        console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/package.manifest');
     }
 
     if(!fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/index.html')) {
         console.error('\nPlease provide <project>/merges/firefoxos/'+buildDirInMerge+'/index.html');
     }
 
-    return (   fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/manifest.webapp')
+    return (   fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/package.manifest')
             && fs.existsSync('platforms/firefoxos/www/'+buildDirInMerge+'/index.html') );
 }
 
@@ -77,7 +77,7 @@ function moveWwwBuildReleaseToBuild() {
     hasAllRequiredCustomReleaseArtifacts();
     console.log('Move index.html and manifest.webapp provided at \'merges/firefoxos/'+buildDirInMerge+'/\' to platforms/firefoxos/build');
     shjs.mv('-f', 'platforms/firefoxos/www/'+buildDirInMerge+'/index.html', 'platforms/firefoxos/build/index.html');
-    shjs.mv('-f' ,'platforms/firefoxos/www/'+buildDirInMerge+'/manifest.webapp', 'platforms/firefoxos/build/manifest.webapp');
+    shjs.mv('-f' ,'platforms/firefoxos/www/'+buildDirInMerge+'/package.manifest', 'platforms/firefoxos/build/package.manifest');
 }
 
 
