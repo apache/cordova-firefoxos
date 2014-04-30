@@ -28,8 +28,7 @@ var path = require('path'),
     buildReleaseDirInMerge  = 'build--release',
     platformWwwDir          = path.join('platforms', 'firefoxos', 'www'),
     platformBuildDir        = path.join('platforms', 'firefoxos', 'build'),
-    buildReleaseDirInWwwDir = path.join(platformWwwDir, buildReleaseDirInMerge)
-;
+    buildReleaseDirInWwwDir = path.join(platformWwwDir, buildReleaseDirInMerge);
 
 function hasMergesCustomReleaseArtifactsDir() {
     return fs.existsSync(path.join('merges', 'firefoxos', buildReleaseDirInMerge));

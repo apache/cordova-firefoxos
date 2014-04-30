@@ -21,9 +21,9 @@
  
 var fs = require('fs'),
     shjs = require('shelljs'),
+    path = require('path'),
     check_reqs = require('./check_reqs'),
-    platformBuildDir = path.join('platforms', 'firefoxos', 'build'),
-;
+    platformBuildDir = path.join('platforms', 'firefoxos', 'build');
 
 exports.cleanProject = function(){
 
@@ -36,7 +36,7 @@ exports.cleanProject = function(){
     console.log('Cleaning Firefoxos project');
     try {
         if (fs.existsSync(platformBuildDir)) {
-            shjs.rm('-r', 'platformBuildDir);
+            shjs.rm('-r', platformBuildDir);
         }
     }
     catch(err) {
