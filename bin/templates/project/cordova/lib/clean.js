@@ -21,24 +21,26 @@
  
 var fs = require('fs'),
     shjs = require('shelljs'),
-    check_reqs = require('./check_reqs');
+    check_reqs = require('./check_reqs'),
+    platformBuildDir = path.join('platforms', 'firefoxos', 'build'),
+;
 
 exports.cleanProject = function(){
 
     // Check that requirements are (stil) met
-    if(!check_reqs.run()) {
+    if (!check_reqs.run()) {
         console.error('Please make sure you meet the software requirements in order to clean an firefoxos cordova project');
         process.exit(2);
     }
     
     console.log('Cleaning Firefoxos project');
     try {
-        if(fs.existsSync('platforms/firefoxos/build')) {
-            shjs.rm('-r', 'platforms/firefoxos/build');
+        if (fs.existsSync(platformBuildDir)) {
+            shjs.rm('-r', 'platformBuildDir);
         }
     }
     catch(err) {
-        console.log('could not remove platforms/firefoxos/build : '+err.message);
+        console.log('could not remove '+platformBuildDir+' : '+err.message);
     }
 
 
