@@ -13,7 +13,8 @@
     "apache"
   ],
   "dependencies": {
-    "shelljs": "^0.1.4"
+    "shelljs": "^0.1.4",
+    "adm-zip": "0.4.4"
   },
   "author": "Apache Software Foundation",
   "contributors": [
