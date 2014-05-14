@@ -26,6 +26,7 @@ var fs = require('fs'),
     ROOT    = path.join(__dirname, '..', '..'),
     check_reqs = require('./check_reqs');
 
+
 exports.createProject = function(project_path,package_name,project_name){
     var VERSION = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8');
     
@@ -35,13 +36,13 @@ exports.createProject = function(project_path,package_name,project_name){
     project_name = typeof project_name !== 'undefined' ? project_name : 'CordovaExample';
 
     // Check if project already exists
-    if(fs.existsSync(project_path)) {
+    if (fs.existsSync(project_path)) {
         console.error('Project already exists! Delete and recreate');
         process.exit(2);
     }
     
     // Check that requirements are met and proper targets are installed
-    if(!check_reqs.run()) {
+    if (!check_reqs.run()) {
         console.error('Please make sure you meeet the software requirements in order to build an firefoxos cordova project');
         process.exit(2);
     }
@@ -51,16 +52,29 @@ exports.createProject = function(project_path,package_name,project_name){
     console.log('Package Name '+ package_name);
     console.log('Project Name '+ project_name);
 
-    //copy template folder
+    //copy template directory
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'www'), project_path);
+
+    //create cordova/lib if it does not exist yet
+    if (!fs.existsSync(path.join(project_path,'cordova', 'lib'))) {
+        shjs.mkdir('-p', path.join(project_path,'cordova', 'lib'));
+    }
+
+    //copy required node_modules
+    shjs.cp('-r', path.join(ROOT, 'node_modules'), path.join(project_path,'cordova'));
+
+    //copy check_reqs file
+    shjs.cp( path.join(ROOT, 'bin', 'lib', 'check_reqs.js'), path.join(project_path,'cordova', 'lib'));
     
     //copy cordova js file
-    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));  
+    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));
 
-    //copy cordova folder
+    //copy cordova directory
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'cordova'), project_path); 
     [
         'run',
+        'build',
+        'clean',
         'version',
     ].forEach(function(f) { 
          shjs.chmod(755, path.join(project_path, 'cordova', f));
