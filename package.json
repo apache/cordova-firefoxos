@@ -20,7 +20,7 @@
   "contributors": [
       {"name": "James Long","email": "jlong@mozilla.com"},
       {"name": "Herm Wong", "email": "hermanw@adobe.com"},
-      {"name": "Steve Gill", "email": "steveng@adobe.com"},
+      {"name": "Steve Gill", "email": "steveng@adobe.com"}
   ],
   "license": "Apache Version 2.0"
 }
