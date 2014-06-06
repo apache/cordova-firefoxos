@@ -53,7 +53,7 @@ exports.createProject = function(project_path,package_name,project_name){
     console.log('Project Name '+ project_name);
 
     //copy template directory
-    shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'www'), project_path);
+    shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'platform_www'), project_path);
 
     //create cordova/lib if it does not exist yet
     if (!fs.existsSync(path.join(project_path,'cordova', 'lib'))) {
@@ -67,7 +67,7 @@ exports.createProject = function(project_path,package_name,project_name){
     shjs.cp( path.join(ROOT, 'bin', 'lib', 'check_reqs.js'), path.join(project_path,'cordova', 'lib'));
     
     //copy cordova js file
-    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'www'));
+    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'platform_www'));
 
     //copy cordova directory
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'cordova'), project_path); 
