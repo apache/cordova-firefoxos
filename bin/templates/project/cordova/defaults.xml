@@ -19,4 +19,9 @@
 -->
 <widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
 
+      <platform name="firefoxos">
+            <icon src="icon/icon-128.png" width="128" height="128" />
+            <icon src="icon/icon-60.png" width="60" height="60" />
+      </platform>
+
 </widget>
