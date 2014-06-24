@@ -49,7 +49,7 @@ exports.buildProject = function(){
 
     // add the project to a zipfile
     var zipFile = zip();
-    zipFile.addLocalFolder(platformWwwDir, '.');
+    zipFile.addLocalFolder(platformWwwDir);
     zipFile.writeZip(packageFile);
 
     console.log('Firefox OS packaged app built in '+ packageFile);
