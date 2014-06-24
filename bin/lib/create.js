@@ -26,7 +26,6 @@ var fs = require('fs'),
     ROOT    = path.join(__dirname, '..', '..'),
     check_reqs = require('./check_reqs');
 
-
 exports.createProject = function(project_path,package_name,project_name){
     var VERSION = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf-8');
     
@@ -61,12 +60,15 @@ exports.createProject = function(project_path,package_name,project_name){
 
     //copy check_reqs file
     shjs.cp( path.join(ROOT, 'bin', 'lib', 'check_reqs.js'), path.join(project_path,'cordova', 'lib'));
-    
+
     //copy cordova directory
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'cordova'), project_path);
 
     //copy platform_www to project folder
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'platform_www'), project_path);
+
+    //copy cordova js file
+    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'platform_www'));
 
     [
         'run',
@@ -76,4 +78,4 @@ exports.createProject = function(project_path,package_name,project_name){
     ].forEach(function(f) { 
          shjs.chmod(755, path.join(project_path, 'cordova', f));
     });
-}
+};
