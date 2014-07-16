@@ -15,4 +15,13 @@
 :: specific language governing permissions and limitations
 :: under the License.
 
-ECHO Cleaning Firefoxos project
+@ECHO OFF
+SET script_path="%~dp0build"
+IF EXIST %script_path% (
+	RMDIR /S %script_path%
+	ECHO Cleaning Firefoxos project
+) ELSE (
+	ECHO.
+    ECHO ERROR: Could not find 'build' script in 'cordova' folder, aborting...>&2
+    EXIT /B 1
+)	
