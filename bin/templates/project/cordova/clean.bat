@@ -16,12 +16,12 @@
 :: under the License.
 
 @ECHO OFF
-SET script_path="%~dp0build"
+SET script_path="%~dp0clean"
 IF EXIST %script_path% (
-	RMDIR /S %script_path%
+	node %script_path% %*
 	ECHO Cleaning Firefoxos project
 ) ELSE (
 	ECHO.
-    ECHO ERROR: Could not find 'build' script in 'cordova' folder, aborting...>&2
-    EXIT /B 1
+    	ECHO ERROR: Could not find 'clean' script in 'cordova' folder, aborting...>&2
+    	EXIT /B 1
 )	
