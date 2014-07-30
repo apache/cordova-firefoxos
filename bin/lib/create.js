@@ -42,7 +42,7 @@ exports.createProject = function(project_path,package_name,project_name){
     
     // Check that requirements are met and proper targets are installed
     if (!check_reqs.run()) {
-        console.error('Please make sure you meeet the software requirements in order to build an firefoxos cordova project');
+        console.error('Please make sure you meet the software requirements in order to build an firefoxos cordova project');
         process.exit(2);
     }
     
@@ -68,7 +68,7 @@ exports.createProject = function(project_path,package_name,project_name){
     shjs.cp('-r', path.join(ROOT, 'bin', 'templates', 'project', 'platform_www'), project_path);
 
     //copy cordova js file
-    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path,'platform_www'));
+    shjs.cp('-r', path.join(ROOT, 'cordova-lib', 'cordova.js'), path.join(project_path, 'www'));
 
     [
         'run',
