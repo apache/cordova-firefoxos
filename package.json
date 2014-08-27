@@ -1,26 +1,35 @@
 {
-  "name": "cordova-firefoxos",
-  "version": "3.5.0",
-  "description": "cordova-firefoxos release",
-  "main": "bin/create",
-  "repository": {
-    "type": "git",
-    "url": "https://git-wip-us.apache.org/repos/asf/cordova-firefoxos.git"
-  },
-  "keywords": [
-    "cordova",
-    "firefoxos",
-    "apache"
-  ],
-  "dependencies": {
-    "shelljs": "^0.1.4",
-    "adm-zip": "0.4.4"
-  },
-  "author": "Apache Software Foundation",
-  "contributors": [
-      {"name": "James Long","email": "jlong@mozilla.com"},
-      {"name": "Herm Wong", "email": "hermanw@adobe.com"},
-      {"name": "Steve Gill", "email": "steveng@adobe.com"}
-  ],
-  "license": "Apache Version 2.0"
+    "name": "cordova-firefoxos",
+    "version": "3.7.0-dev",
+    "description": "cordova-firefoxos release",
+    "main": "bin/create",
+    "repository": {
+        "type": "git",
+        "url": "https://git-wip-us.apache.org/repos/asf/cordova-firefoxos.git"
+    },
+    "keywords": [
+        "cordova",
+        "firefoxos",
+        "apache"
+    ],
+    "dependencies": {
+        "shelljs": "^0.1.4",
+        "adm-zip": "0.4.4"
+    },
+    "author": "Apache Software Foundation",
+    "contributors": [
+        {
+            "name": "James Long",
+            "email": "jlong@mozilla.com"
+        },
+        {
+            "name": "Herm Wong",
+            "email": "hermanw@adobe.com"
+        },
+        {
+            "name": "Steve Gill",
+            "email": "steveng@adobe.com"
+        }
+    ],
+    "license": "Apache Version 2.0"
 }
