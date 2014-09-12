@@ -18,7 +18,7 @@
     },
     "bundledDependencies": [
         "shelljs",
-        "adm-zip"    
+        "adm-zip"
     ],
     "author": "Apache Software Foundation",
     "contributors": [
