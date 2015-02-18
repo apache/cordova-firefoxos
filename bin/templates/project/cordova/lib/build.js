@@ -18,12 +18,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- 
+
 var path = require('path'),
     fs = require('fs'),
     clean = require('./clean'),
     shjs = require('shelljs'),
-    zip = require('adm-zip'),
+    archiver = require('archiver'),
     check_reqs = require('./check_reqs'),
     platformWwwDir          = path.join('platforms', 'firefoxos', 'www'),
     platformBuildDir        = path.join('platforms', 'firefoxos', 'build'),
@@ -40,7 +40,7 @@ exports.buildProject = function(){
         console.error('Please make sure you meet the software requirements in order to build a firefoxos cordova project');
         process.exit(2);
     }
-    
+
     clean.cleanProject(); // remove old build result
 
     if (!fs.existsSync(platformBuildDir)) {
@@ -48,13 +48,23 @@ exports.buildProject = function(){
     }
 
     // add the project to a zipfile
-    var zipFile = zip();
-    zipFile.addLocalFolder(platformWwwDir);
-    zipFile.writeZip(packageFile);
-
-    console.log('Firefox OS packaged app built in '+ packageFile);
-
-    process.exit(0);
+    var zipFileStream = fs.createWriteStream(packageFile);
+    zipFileStream.on('finish', function() {
+        console.log('Firefox OS packaged app built in '+ packageFile);
+        process.exit(0);
+    });
+    zipFileStream.on('error', function(err) {
+        console.error('Error while writing Firefox OS packaged app: ' + err);
+        process.exit(2);
+    });
+    var zipFile = archiver('zip');
+    zipFile.directory(platformWwwDir, false);
+    zipFile.pipe(zipFileStream);
+    zipFile.finalize();
+    zipFile.on('error', function(err) {
+        console.error('Error while creating Firefox OS packaged app: ' + err);
+        process.exit(2);
+    });
 };
 
 module.exports.help = function() {
