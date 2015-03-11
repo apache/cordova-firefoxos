@@ -1,0 +1,6 @@
+COMMAND     PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+UserEvent   247 test    6u  IPv4 0xd0ce0ee8cea45c97      0t0  UDP *:*
+SystemUIS   264 test    8u  IPv4 0xd0ce0ee8cea45aaf      0t0  UDP *:*
+sharingd    276 test   12u  IPv4 0xd0ce0ee8cea45127      0t0  UDP *:*
+adb       25441 test   14u  IPv4 0xd0ce0ee8da51b5e7      0t0  TCP 127.0.0.1:5037 (LISTEN)
+firefox   55811 test   31u  IPv4 0xd0ce0ee8d04b45e7      0t0  TCP 127.0.0.1:6000 (LISTEN)

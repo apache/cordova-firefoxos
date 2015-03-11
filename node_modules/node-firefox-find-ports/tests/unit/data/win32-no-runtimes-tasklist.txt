@@ -1,0 +1,27 @@
+Image Name                     PID Session Name        Session#    Mem Usage
+========================= ======== ================ =========== ============
+System Idle Process              0 Services                   0          4 K
+System                           4 Services                   0        316 K
+smss.exe                       396 Services                   0        528 K
+csrss.exe                      500 Services                   0      2,508 K
+wininit.exe                    588 Services                   0        940 K
+csrss.exe                      596 RDP-Tcp#2                  1      9,696 K
+winlogon.exe                   652 RDP-Tcp#2                  1      2,692 K
+services.exe                   684 Services                   0      5,516 K
+lsass.exe                      692 Services                   0     10,820 K
+svchost.exe                    768 Services                   0     13,456 K
+svchost.exe                    812 Services                   0      9,004 K
+atiesrxx.exe                   896 Services                   0      1,540 K
+dwm.exe                        924 RDP-Tcp#2                  1     80,632 K
+vmnat.exe                     1052 Services                   0      2,724 K
+vmnetdhcp.exe                 2076 Services                   0      7,432 K
+vmware-usbarbitrator64.ex     2100 Services                   0      1,652 K
+vmware-authd.exe              2132 Services                   0      3,296 K
+svchost.exe                   2552 Services                   0     11,008 K
+conhost.exe                  15536 RDP-Tcp#2                  1      3,208 K
+plugin-container.exe          4980 RDP-Tcp#2                  1     60,460 K
+taskeng.exe                  10844 RDP-Tcp#2                  1      5,476 K
+SearchProtocolHost.exe       10596 Services                   0     11,656 K
+SearchFilterHost.exe          2232 Services                   0      5,796 K
+tasklist.exe                  3636 RDP-Tcp#2                  1      5,376 K
+WmiPrvSE.exe                 14332 Services                   0      5,748 K

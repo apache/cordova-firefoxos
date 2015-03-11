@@ -1,0 +1,16 @@
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:37566         0.0.0.0:*               LISTEN      2330/b2g-bin    
+tcp        0      0 127.0.0.1:2828          0.0.0.0:*               LISTEN      2330/b2g-bin    
+tcp        0      0 127.0.0.1:5037          0.0.0.0:*               LISTEN      2988/adb        
+tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      -               
+udp        0      0 0.0.0.0:631             0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:59281           0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:3746            0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:5353            0.0.0.0:*                           -               
+udp        0      0 127.0.1.1:53            0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           -               
+udp6       0      0 :::61417                :::*                                -               
+udp6       0      0 :::5353                 :::*                                -               
+udp6       0      0 :::42774                :::*                                -               

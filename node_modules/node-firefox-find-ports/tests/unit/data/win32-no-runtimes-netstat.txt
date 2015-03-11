@@ -1,0 +1,33 @@
+Active Connections
+
+  Proto  Local Address          Foreign Address        State           PID
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       812
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:902            0.0.0.0:0              LISTENING       2132
+  TCP    0.0.0.0:912            0.0.0.0:0              LISTENING       2132
+  TCP    0.0.0.0:2869           0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1128
+  TCP    0.0.0.0:5357           0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:17500          0.0.0.0:0              LISTENING       4448
+  TCP    0.0.0.0:27036          0.0.0.0:0              LISTENING       7072
+  TCP    0.0.0.0:43244          0.0.0.0:0              LISTENING       4240
+  TCP    0.0.0.0:49152          0.0.0.0:0              LISTENING       588
+  TCP    0.0.0.0:49153          0.0.0.0:0              LISTENING       968
+  TCP    0.0.0.0:49154          0.0.0.0:0              LISTENING       104
+  TCP    0.0.0.0:49155          0.0.0.0:0              LISTENING       1328
+  TCP    0.0.0.0:49157          0.0.0.0:0              LISTENING       684
+  TCP    0.0.0.0:49183          0.0.0.0:0              LISTENING       692
+  TCP    127.0.0.1:4370         0.0.0.0:0              LISTENING       4180
+  TCP    127.0.0.1:4380         0.0.0.0:0              LISTENING       4180
+  TCP    127.0.0.1:5037         0.0.0.0:0              LISTENING       2864
+  TCP    127.0.0.1:5037         127.0.0.1:60570        ESTABLISHED     2864
+  TCP    127.0.0.1:5354         0.0.0.0:0              LISTENING       1740
+  TCP    127.0.0.1:5354         127.0.0.1:49156        ESTABLISHED     1740
+  TCP    127.0.0.1:5354         127.0.0.1:49168        ESTABLISHED     1740
+  UDP    0.0.0.0:123            *:*                                    412
+  UDP    0.0.0.0:1900           *:*                                    4240
+  UDP    0.0.0.0:3389           *:*                                    1128
+  UDP    0.0.0.0:3702           *:*                                    1840
+  UDP    0.0.0.0:3702           *:*                                    412
+  UDP    0.0.0.0:3702           *:*                                    2552
+  UDP    0.0.0.0:3702           *:*                                    2552
