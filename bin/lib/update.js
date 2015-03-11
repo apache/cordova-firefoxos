@@ -42,6 +42,7 @@ function copyScripts(projectPath) {
     shell.rm('-rf', destScriptsDir);
     // Copy in the new ones.
     shell.cp('-r', srcScriptsDir, projectPath);
+    shell.cp('-r', path.join(ROOT, 'node_modules'), destScriptsDir);
     // Make sure they are executable.
     shell.find(destScriptsDir).forEach(function(entry) {
         shell.chmod(755, entry);

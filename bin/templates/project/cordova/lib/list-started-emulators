@@ -19,13 +19,14 @@
        under the License.
 */
 
-var run  = require('./lib/run'),
-    args = process.argv;
+var common = require('./common');
 
-// Support basic help commands
-if (args[2] == '--help' || args[2] == '/?' || args[2] == '-h' ||
-                    args[2] == 'help' || args[2] == '-help' || args[2] == '/help') {
-    run.help(args);
-} else {
-    run.run(args);
-}
+common.collectRunningSimulatorsByVersion().then(function(running) {
+    for (var version in running) {
+        var simulator = running[version];
+        console.log([version, simulator.port, simulator.type, simulator.pid].join(' '));
+    }
+}).catch(function(err) {
+    console.error('ERROR: ' + err);
+    process.exit(2);
+});
