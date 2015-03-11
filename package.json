@@ -1,40 +1,55 @@
 {
-    "name": "cordova-firefoxos",
-    "version": "3.8.0-dev",
-    "description": "cordova-firefoxos release",
-    "main": "bin/create",
-    "repository": {
-        "type": "git",
-        "url": "https://git-wip-us.apache.org/repos/asf/cordova-firefoxos.git"
+  "name": "cordova-firefoxos",
+  "version": "3.8.0-dev",
+  "description": "cordova-firefoxos release",
+  "main": "bin/create",
+  "repository": {
+    "type": "git",
+    "url": "https://git-wip-us.apache.org/repos/asf/cordova-firefoxos.git"
+  },
+  "keywords": [
+    "cordova",
+    "firefoxos",
+    "apache",
+    "ecosystem:cordova"
+  ],
+  "dependencies": {
+    "archiver": "^0.14.3",
+    "es6-promise": "^2.0.1",
+    "node-firefox-connect": "^1.0.0",
+    "node-firefox-find-app": "^1.0.0",
+    "node-firefox-find-devices": "^1.0.0",
+    "node-firefox-find-ports": "^1.2.0",
+    "node-firefox-find-simulators": "^1.1.0",
+    "node-firefox-forward-ports": "^1.0.0",
+    "node-firefox-install-app": "^1.0.0",
+    "node-firefox-launch-app": "^1.1.0",
+    "node-firefox-start-simulator": "^1.2.0",
+    "node-firefox-uninstall-app": "^1.0.0",
+    "shelljs": "^0.1.4"
+  },
+  "bundledDependencies": [
+    "archiver",
+    "shelljs"
+  ],
+  "author": "Apache Software Foundation",
+  "contributors": [
+    {
+      "name": "James Long",
+      "email": "jlong@mozilla.com"
     },
-    "keywords": [
-        "cordova",
-        "firefoxos",
-        "apache",
-        "ecosystem:cordova"
-    ],
-    "dependencies": {
-        "archiver": "^0.14.3",
-        "shelljs": "^0.1.4"
+    {
+      "name": "Les Orchard",
+      "email": "lorchard@mozilla.com"
     },
-    "bundledDependencies": [
-        "archiver",
-        "shelljs"
-    ],
-    "author": "Apache Software Foundation",
-    "contributors": [
-        {
-            "name": "James Long",
-            "email": "jlong@mozilla.com"
-        },
-        {
-            "name": "Herm Wong",
-            "email": "hermanw@adobe.com"
-        },
-        {
-            "name": "Steve Gill",
-            "email": "steveng@adobe.com"
-        }
-    ],
-    "license": "Apache Version 2.0"
+    {
+      "name": "Herm Wong",
+      "email": "hermanw@adobe.com"
+    },
+    {
+      "name": "Steve Gill",
+      "email": "steveng@adobe.com"
+    }
+  ],
+  "license": "Apache Version 2.0"
 }
