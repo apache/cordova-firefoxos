@@ -1,6 +1,6 @@
 {
     "name": "cordova-firefoxos",
-    "version": "3.7.0-dev",
+    "version": "3.8.0-dev",
     "description": "cordova-firefoxos release",
     "main": "bin/create",
     "repository": {
