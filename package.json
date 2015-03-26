@@ -1,6 +1,6 @@
 {
     "name": "cordova-firefoxos",
-    "version": "3.7.0-dev",
+    "version": "3.7.0",
     "description": "cordova-firefoxos release",
     "main": "bin/create",
     "repository": {
@@ -10,7 +10,8 @@
     "keywords": [
         "cordova",
         "firefoxos",
-        "apache"
+        "apache",
+        "ecosystem:cordova"
     ],
     "dependencies": {
         "archiver": "^0.14.3",
