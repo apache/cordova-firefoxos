@@ -10,7 +10,8 @@
     "keywords": [
         "cordova",
         "firefoxos",
-        "apache"
+        "apache",
+        "ecosystem:cordova"
     ],
     "dependencies": {
         "archiver": "^0.14.3",
