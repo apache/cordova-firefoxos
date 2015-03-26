@@ -20,6 +20,11 @@
 -->
 ## Release Notes for Cordova FirefoxOS ##
 
+### 3.7.0 (March 26, 2015)
+* CB-7567 Don't use adm-zip because it creates invalid zip files
+* CB-8417 moved platform specific js into platform
+* added bundledDependencies to package.json
+
 ### 3.6.0 ###
 
 * updated version to 3.6.1
